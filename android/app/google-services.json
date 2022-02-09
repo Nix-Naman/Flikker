@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169566902775",
+    "project_id": "flikker-db9b6",
+    "storage_bucket": "flikker-db9b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169566902775:android:acb8499a9632e008aab6f2",
+        "android_client_info": {
+          "package_name": "com.app.flikker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169566902775-pn0i5tou6d3ogigmnkivvc1nsu477t5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8T5xtlmDP_zKZ3cqZ12LzI5KJsompITc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169566902775-pn0i5tou6d3ogigmnkivvc1nsu477t5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
