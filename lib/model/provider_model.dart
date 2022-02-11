@@ -1,22 +1,37 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flikk/model/movie_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class MoviesProvider with ChangeNotifier {
   final firestoreInstance = FirebaseFirestore.instance;
-  List<Movies> movieList = [];
-  List<Movies> filteredmovieList = [];
+  List<Movies> contentList = [];
+  List<Movies> item = [];
   Future<void> getData(String tag) async {
-    movieList.clear();
+    contentList.clear();
     if (tag == "Movies") {
       await firestoreInstance.collection("Movies").get().then((value) {
         value.docs.forEach((element) {
           Movies movie = Movies.fromJson(element.data());
-          movieList.add(movie);
+          contentList.add(movie);
         });
       });
-    } else if (tag == "Tv-show") {
-    } else if (tag == 'Anime') {}
+      item.addAll(contentList);
+    } else if (tag == "TV Show") {
+      item.clear();
+    } else if (tag == 'Anime') {
+      item.clear();
+    }
+  }
+
+  void filter(String query) {
+    item = contentList.where((i) {
+      var title = i.title.toLowerCase();
+      return title.contains(query);
+    }).toList();
+    print(item[0].title);
+    notifyListeners();
   }
 }
 

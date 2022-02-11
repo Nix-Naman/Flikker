@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -45,8 +46,9 @@ class DetailScreen extends StatelessWidget {
                   image: DecorationImage(
                       fit: BoxFit.cover, image: NetworkImage(movie.image)),
                 ),
-                child: Stack(children: [
-                  Card(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     color: Colors.white.withOpacity(0.08),
@@ -57,7 +59,7 @@ class DetailScreen extends StatelessWidget {
                           color: Colors.white,
                         )),
                   ),
-                ]),
+                ),
               ),
             ),
             Padding(
@@ -74,17 +76,19 @@ class DetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        AutoSizeText(
                           movie.title,
-                          style:
-                              TextStyle(fontSize: 36, fontFamily: "ReemKufi"),
+                          maxFontSize: 36,
+                          maxLines: 1,
+                          minFontSize: 28,
+                          style: TextStyle(fontFamily: "ReemKufi"),
                           overflow: TextOverflow.ellipsis,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 10, top: 10),
                           child: CircularPercentIndicator(
                             radius: 25,
-                            percent: 0.75,
+                            percent: movie.rating * 0.1,
                             curve: Curves.easeIn,
                             animation: true,
                             center: Text(movie.rating.toString()),

@@ -1,4 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
+
 import 'package:flikk/screens/content_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class HomePage extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    // MoviesProvider().getData("Anime");
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

@@ -1,8 +1,8 @@
 import 'package:flikk/model/provider_model.dart';
 import 'package:flikk/screens/detail_screen.dart';
+import 'package:flikk/widgets/animated_search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../model/movie_model.dart';
 
 class ContentPage extends StatefulWidget {
   final String appbarTitle;
@@ -14,16 +14,16 @@ class ContentPage extends StatefulWidget {
 }
 
 class _ContentPageState extends State<ContentPage> {
-  static const List<String> filters = [
-    "Action",
-    "Adventure",
-    "Drama",
-    "Thriller",
-    "Hindi",
-    "English",
-    "Dual Audio",
-    "Romance",
-  ];
+  Future? myFuture;
+
+  @override
+  void initState() {
+    myFuture = Provider.of<MoviesProvider>(context, listen: false)
+        .getData(widget.appbarTitle);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final providerInstance = Provider.of<MoviesProvider>(context);
@@ -47,78 +47,74 @@ class _ContentPageState extends State<ContentPage> {
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
-          child: Column(
-            children: [
-              FutureBuilder(
-                  future: providerInstance.getData(widget.appbarTitle),
-                  builder: (context, snapshot) {
-                    return snapshot.connectionState == ConnectionState.waiting
-                        ? Center(
-                            child: CircularProgressIndicator(
-                              color:
-                                  MediaQuery.of(context).platformBrightness ==
+          child: FutureBuilder(
+              future: myFuture,
+              builder: (context, snapshot) {
+                return snapshot.connectionState == ConnectionState.waiting
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: MediaQuery.of(context).platformBrightness ==
+                                  Brightness.dark
+                              ? Colors.white
+                              : Colors.black54,
+                        ),
+                      )
+                    : Container(
+                        child: providerInstance.item.isEmpty
+                            ? Column(
+                                children: [
+                                  Image.asset(MediaQuery.of(context)
+                                              .platformBrightness ==
                                           Brightness.dark
-                                      ? Colors.white
-                                      : Colors.black54,
-                            ),
-                          )
-                        : Container(
-                            child: providerInstance.movieList.isEmpty
-                                ? Column(
-                                    children: [
-                                      Image.asset(MediaQuery.of(context)
-                                                  .platformBrightness ==
-                                              Brightness.dark
-                                          ? "assets/images/Search-dark.gif"
-                                          : "assets/images/Search.gif"),
-                                      Text(
-                                        "No data Found",
-                                        style: TextStyle(fontSize: 24),
-                                      ),
-                                    ],
-                                  )
-                                : GridView.builder(
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 15,
-                                            mainAxisSpacing: 15,
-                                            childAspectRatio: 0.75),
-                                    itemCount:
-                                        providerInstance.movieList.length,
-                                    itemBuilder: (BuildContext ctx, indx) {
-                                      return GestureDetector(
-                                        onTap: () => Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (BuildContext ctx) =>
-                                                    DetailScreen(
-                                                      movie: providerInstance
-                                                          .movieList[indx],
-                                                    ))),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: GridTile(
-                                            footer: Container(
-                                              decoration: BoxDecoration(
-                                                  color: Colors.black
-                                                      .withOpacity(0.9)),
-                                              child: Center(
-                                                child: Text(
-                                                    providerInstance
-                                                        .movieList[indx].title,
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20)),
-                                              ),
+                                      ? "assets/images/Search-dark.gif"
+                                      : "assets/images/Search.gif"),
+                                  Text(
+                                    "No data Found",
+                                    style: TextStyle(fontSize: 24),
+                                  ),
+                                ],
+                              )
+                            : GridView.builder(
+                                shrinkWrap: true,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 15,
+                                        mainAxisSpacing: 15,
+                                        childAspectRatio: 0.75),
+                                itemCount: providerInstance.item.length,
+                                itemBuilder: (BuildContext ctx, indx) {
+                                  return Consumer<MoviesProvider>(
+                                    builder: (context, value, child) =>
+                                        GestureDetector(
+                                      onTap: () => Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (BuildContext ctx) =>
+                                                  DetailScreen(
+                                                    movie: value.item[indx],
+                                                  ))),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: GridTile(
+                                          footer: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.black
+                                                    .withOpacity(0.9)),
+                                            child: Center(
+                                              child: Text(
+                                                  value.item[indx].title,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20)),
                                             ),
-                                            child: Hero(
-                                              tag:
-                                                  'heroTag-${providerInstance.movieList[indx].title}',
+                                          ),
+                                          child: Hero(
+                                            tag:
+                                                'heroTag-${value.item[indx].title}',
+                                            child: Container(
+                                              color: Colors.grey.shade400,
                                               child: Image.network(
-                                                providerInstance
-                                                    .movieList[indx].image,
+                                                value.item[indx].image,
                                                 loadingBuilder:
                                                     (BuildContext context,
                                                         Widget child,
@@ -143,14 +139,15 @@ class _ContentPageState extends State<ContentPage> {
                                             ),
                                           ),
                                         ),
-                                      );
-                                    },
-                                  ),
-                          );
-                  }),
-            ],
-          ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                      );
+              }),
         ),
+        floatingActionButton: AnimatedSearchBar(),
       ),
     );
   }
