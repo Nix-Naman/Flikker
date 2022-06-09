@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "169566902775",
-    "project_id": "flikker-db9b6",
-    "storage_bucket": "flikker-db9b6.appspot.com"
+    "project_number": "366558462632",
+    "project_id": "flikker-5e864",
+    "storage_bucket": "flikker-5e864.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:169566902775:android:acb8499a9632e008aab6f2",
+        "mobilesdk_app_id": "1:366558462632:android:96b81ef3734e2c6bd7f89d",
         "android_client_info": {
           "package_name": "com.app.flikker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "169566902775-pn0i5tou6d3ogigmnkivvc1nsu477t5n.apps.googleusercontent.com",
+          "client_id": "366558462632-oovler340urr25998gb0vv6nh9joqnk0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC8T5xtlmDP_zKZ3cqZ12LzI5KJsompITc"
+          "current_key": "AIzaSyDRv0LWjQAU0CF31tgyGhgPjspp6Ep6WpM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "169566902775-pn0i5tou6d3ogigmnkivvc1nsu477t5n.apps.googleusercontent.com",
+              "client_id": "366558462632-oovler340urr25998gb0vv6nh9joqnk0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

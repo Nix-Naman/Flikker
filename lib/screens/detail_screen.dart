@@ -1,28 +1,19 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:card_swiper/card_swiper.dart';
+
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../model/movie_model.dart';
 
 class DetailScreen extends StatelessWidget {
   final Movies movie;
-  const DetailScreen({
+  DetailScreen({
     Key? key,
     required this.movie,
   }) : super(key: key);
-  static const List titles = [
-    "anime.png",
-    'movie.png',
-    'tv.jpeg',
-    'snam.jpg',
-    'anime.png',
-    'movie.png',
-    'tv.jpeg',
-    'snam.jpg',
-    'anime.png'
-  ];
+
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.height;
@@ -155,7 +146,7 @@ class DetailScreen extends StatelessWidget {
                               style: TextStyle(fontSize: 16),
                             ),
                             SizedBox(height: 10),
-                            Text("Screenshots",
+                            Text("Trailer",
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
@@ -163,24 +154,16 @@ class DetailScreen extends StatelessWidget {
                               constraints: BoxConstraints.tight(Size(
                                   double.infinity,
                                   MediaQuery.of(context).size.height * 0.23)),
-                              child: Swiper(
-                                viewportFraction: 0.8,
-                                scale: 0.9,
-                                itemCount: 5,
-                                autoplay: true,
-                                autoplayDelay: 5000,
-                                index: 0,
-                                itemBuilder: (BuildContext ctx, index) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                "assets/images/${titles[index]}")),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  );
-                                },
+                              child: YoutubePlayer(
+                                controller: YoutubePlayerController(
+                                  initialVideoId: YoutubePlayer.convertUrlToId(
+                                          movie.trailer)
+                                      .toString(),
+                                  flags: YoutubePlayerFlags(
+                                    autoPlay: false,
+                                    mute: false,
+                                  ),
+                                ),
                               ),
                             ),
                           ],

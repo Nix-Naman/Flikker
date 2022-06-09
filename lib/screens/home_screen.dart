@@ -1,5 +1,4 @@
 import 'package:card_swiper/card_swiper.dart';
-
 import 'package:flikk/screens/content_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -8,13 +7,12 @@ class HomePage extends StatelessWidget {
   final List title = [
     "anime.png",
     'movie.png',
-    'tv.jpeg',
-    'snam.jpg',
+    'tv.png',
+    'snam.png',
     'anime.png'
   ];
   @override
   Widget build(BuildContext context) {
-    // MoviesProvider().getData("Anime");
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -41,7 +39,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 15),
               child: Text(
-                "Trending",
+                "Latest",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -91,7 +89,7 @@ class HomePage extends StatelessWidget {
             Spacer(),
             ContentCard(title: "Movies", img: "movie.png"),
             Spacer(),
-            ContentCard(title: "TV Show", img: "tv.jpeg"),
+            ContentCard(title: "TV Show", img: "tv.png"),
             Spacer(),
             ContentCard(title: "Anime", img: "anime.png"),
             Spacer(),
@@ -119,6 +117,7 @@ class ContentCard extends StatelessWidget {
         )),
         child: Container(
           height: MediaQuery.of(context).size.height * 0.17,
+          width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(

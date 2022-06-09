@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flikk/model/movie_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,11 +8,13 @@ class MoviesProvider with ChangeNotifier {
   List<Movies> item = [];
   Future<void> getData(String tag) async {
     contentList.clear();
+    item.clear();
     if (tag == "Movies") {
       await firestoreInstance.collection("Movies").get().then((value) {
         value.docs.forEach((element) {
           Movies movie = Movies.fromJson(element.data());
           contentList.add(movie);
+          print(element.data());
         });
       });
       item.addAll(contentList);
@@ -23,6 +23,7 @@ class MoviesProvider with ChangeNotifier {
     } else if (tag == 'Anime') {
       item.clear();
     }
+    print(contentList.length);
   }
 
   void filter(String query) {

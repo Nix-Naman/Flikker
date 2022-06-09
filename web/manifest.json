@@ -1,6 +1,6 @@
 {
-    "name": "flikk",
-    "short_name": "flikk",
+    "name": "flikker",
+    "short_name": "flikker",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
