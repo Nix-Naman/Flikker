@@ -1,16 +1,34 @@
-# flikk
 
-A new Flutter project.
+# Flikker
 
-## Getting Started
+A simple movie downloading app powered by Firebase as backend. 
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Badges
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Add badges from somewhere like: [shields.io](https://shields.io/)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
+
+
+## Demo
+
+Insert gif or link to demo
+
+
+## Features
+
+- Light/dark mode
+- Live previews
+- Fullscreen mode
+- Cross platform
+
+
+## Tech Stack
+
+**Client:** Flutter & Dart
+
+**Server:** Firebase
+
